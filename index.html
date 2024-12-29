@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <!-- Add an ID to the logo for easier targeting in JS -->
+            <img src="Spotify Clone/logo.png" alt="Logo" class="logo" id="spotify-logo">
+        </div>
+        <div class="header-text">
+            <h1>My Music App</h1>
+            <p>Explore your favorite music and discover new hits!</p>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <section class="search-bar">
+        <input type="text" id="search" placeholder="Search for songs, albums, or artists">
+    </section>
+
+    <!-- Song List -->
+    <section class="song-list" id="song-list">
+        <!-- Songs will be dynamically added here by JS -->
+    </section>
+
+    <!-- Audio Player -->
+    <section class="audio-player">
+        <audio id="audio-player" controls>
+            <source src="" id="audio-source" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div id="current-song">Select a song to play</div> <!-- This is where the song info will be displayed -->
+    </section>
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
