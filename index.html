@@ -10,14 +10,16 @@
 
     <!-- Header Section -->
     <header>
-        <div class="logo-container">
-            <!-- Add an ID to the logo for easier targeting in JS -->
-            <img src="Spotify Clone/logo.png" alt="Logo" class="logo" id="spotify-logo">
+        <div class="logo-container" onclick="location.reload();">
+            <img src="Spotify Clone/logo.png" alt="Logo" class="logo">
         </div>
         <div class="header-text">
             <h1>My Music App</h1>
             <p>Explore your favorite music and discover new hits!</p>
         </div>
+
+        <!-- Dark/Light Mode Toggle -->
+        <button id="theme-toggle" class="theme-toggle">🌞</button>
     </header>
 
     <!-- Search Bar -->
@@ -36,9 +38,8 @@
             <source src="" id="audio-source" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
-        <div id="current-song">Select a song to play</div> <!-- This is where the song info will be displayed -->
+        <div id="current-song">Select a song to play</div>
     </section>
-    
 
     <script src="app.js"></script>
 </body>

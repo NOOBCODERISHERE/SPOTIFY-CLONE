@@ -3,8 +3,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Keeping the dark background */
+    background-color: #121212; /* Dark background */
     color: white;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text */
 }
 
 /* Header Section */
@@ -13,7 +20,7 @@ header {
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
-    background-color: transparent; /* Removed green background */
+    background-color: transparent;
 }
 
 /* Logo Styling */
@@ -24,7 +31,6 @@ header {
 .logo {
     height: 50px; /* Adjust the logo size as needed */
     width: auto;
-    cursor: pointer;
 }
 
 /* Header Text */
@@ -37,6 +43,21 @@ header {
 .header-text p {
     font-size: 14px;
     color: #b3b3b3;
+}
+
+/* Dark Mode Header */
+body.light-mode header .header-text h1 {
+    color: #333; /* Dark header text in light mode */
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 /* Search Bar */
@@ -62,7 +83,6 @@ header {
 }
 
 .song-item {
-    position: relative; /* Allow positioning of the GIF on top of the song item */
     background-color: #333;
     padding: 15px;
     border-radius: 8px;
@@ -72,8 +92,8 @@ header {
     transition: background-color 0.3s ease, transform 0.2s;
     background-size: cover;
     background-position: center center;
-    height: 250px; /* Set height for the song item */
-    color: transparent; /* Hide text if the image is visible */
+    height: 250px;
+    color: transparent;
 }
 
 /* Hover effect */
@@ -82,15 +102,13 @@ header {
     transform: scale(1.05);
 }
 
-/* Playing GIF Styling */
-.song-item .playing-gif {
-    position: absolute;
-    top: 50%; /* Center the GIF vertically */
-    left: 50%; /* Center the GIF horizontally */
-    transform: translate(-50%, -50%); /* Offset the GIF to ensure it's perfectly centered */
-    width: 50px; /* Set width of the GIF */
-    height: 50px; /* Set height of the GIF */
-    display: none; /* Hide the GIF by default */
+/* Light Mode Song Item */
+body.light-mode .song-item {
+    background-color: #ddd; /* Lighter background in light mode */
+}
+
+body.light-mode .song-item:hover {
+    background-color: #ccc; /* Slightly darker on hover */
 }
 
 /* Audio Player Section */
@@ -103,6 +121,10 @@ header {
 #current-song {
     margin-top: 10px;
     font-size: 18px;
-    color: white;  /* Make sure text is white */
+    color: white;
     font-weight: bold;
+}
+
+body.light-mode #current-song {
+    color: #333; /* Dark text in light mode */
 }

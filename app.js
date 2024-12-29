@@ -1,13 +1,4 @@
-// Add event listener for the Spotify logo click
-const logo = document.getElementById("spotify-logo");
-
-if (logo) {
-    logo.addEventListener("click", function() {
-        window.location.reload();  // Refresh the page when logo is clicked
-    });
-}
-
-// The rest of your code remains unchanged
+// Sample song data (you can change this based on your actual song files)
 const songs = [
     { title: "Song 1", artist: "Artist 1", audioUrl: "Spotify Clone/songs/1.mp3", coverImage: "Spotify Clone/Covers/1.jpg" },
     { title: "Song 2", artist: "Artist 2", audioUrl: "Spotify Clone/songs/2.mp3", coverImage: "Spotify Clone/Covers/2.jpg" },
@@ -36,13 +27,11 @@ function populateSongList(songsToDisplay) {
         songItem.innerHTML = `
             <strong>${song.title}</strong><br>
             <small>${song.artist}</small>
-            <img src="Spotify Clone/playing.gif" alt="Playing" class="playing-gif"> <!-- GIF Image -->
         `;
 
         songItem.addEventListener("click", () => playSong(song, index));
         songList.appendChild(songItem);
-    });
-}
+})}
 
 // Initially populate the song list with all songs
 populateSongList(songs);
@@ -73,29 +62,39 @@ function playSong(song, index) {
     currentSongDisplay.innerHTML = `Now Playing: <strong>${song.title}</strong> by <strong>${song.artist}</strong>`;
     currentSongDisplay.style.color = "white"; // Set text color to white
 
-    // Remove the playing GIF from all song items
-    const songItems = document.querySelectorAll('.song-item');
-    songItems.forEach(item => {
-        const gif = item.querySelector('.playing-gif');
-        if (gif) {
-            gif.style.display = 'none'; // Hide the GIF for all items
-        }
-    });
-
-    // Add the playing GIF to the clicked song
-    const clickedSongItem = songItems[index];
-    const gif = clickedSongItem.querySelector('.playing-gif');
-    if (gif) {
-        gif.style.display = 'block'; // Show the GIF for the clicked song
-    }
-
     // Highlight the currently playing song
+    const songItems = document.querySelectorAll('.song-item');
     songItems.forEach(item => item.classList.remove('playing')); // Remove from all
     songItems[index].classList.add('playing'); // Add to the selected one
-
-    // Add event listener to switch to the next song when the current song ends
-    audioPlayer.addEventListener('ended', function() {
-        const nextSongIndex = (index + 1) % songs.length; // Loop back to the first song
-        playSong(songs[nextSongIndex], nextSongIndex);
-    });
 }
+
+// Handle the Dark/Light Mode Toggle
+const themeToggleButton = document.getElementById("theme-toggle");
+
+themeToggleButton.addEventListener("click", () => {
+    // Toggle 'light-mode' class on the body
+    document.body.classList.toggle("light-mode");
+
+    // Change the button text based on the theme
+    if (document.body.classList.contains("light-mode")) {
+        themeToggleButton.innerHTML = "🌙"; // Dark mode icon
+    } else {
+        themeToggleButton.innerHTML = "🌞"; // Light mode icon
+    }
+
+    // Save the theme preference to localStorage
+    const currentTheme = document.body.classList.contains("light-mode") ? "light" : "dark";
+    localStorage.setItem("theme", currentTheme);
+});
+
+// Check for stored theme preference on page load
+window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light-mode");
+        themeToggleButton.innerHTML = "🌙"; // Switch to dark mode icon
+    } else {
+        document.body.classList.remove("light-mode");
+        themeToggleButton.innerHTML = "🌞"; // Switch to light mode icon
+    }
+});
