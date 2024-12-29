@@ -3,15 +3,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Dark background */
+    background-color: #121212; /* Default dark mode background */
     color: white;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-}
-
-/* Light Mode Styles */
-body.light-mode {
-    background-color: #f9f9f9; /* Light background */
-    color: #333; /* Dark text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
 }
 
 /* Header Section */
@@ -25,12 +19,28 @@ header {
 
 /* Logo Styling */
 .logo-container {
-    margin-right: 20px; /* Spacing between the logo and header text */
+    margin-right: 20px;
 }
 
 .logo {
-    height: 50px; /* Adjust the logo size as needed */
+    height: 50px;
     width: auto;
+    cursor: pointer;
+}
+
+/* Theme Toggle Button */
+.theme-toggle button {
+    font-size: 24px;
+    margin-left: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: white;
+    transition: color 0.3s; /* Smooth transition for color */
+}
+
+.theme-toggle button:hover {
+    color: #ffcc00; /* Change color when hovered */
 }
 
 /* Header Text */
@@ -45,21 +55,6 @@ header {
     color: #b3b3b3;
 }
 
-/* Dark Mode Header */
-body.light-mode header .header-text h1 {
-    color: #333; /* Dark header text in light mode */
-}
-
-/* Dark Mode Toggle Button */
-.theme-toggle {
-    padding: 10px 20px;
-    border: none;
-    background-color: transparent;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-}
-
 /* Search Bar */
 .search-bar {
     padding: 20px;
@@ -71,6 +66,13 @@ body.light-mode header .header-text h1 {
     width: 80%;
     border-radius: 20px;
     border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+}
+
+.search-bar input::placeholder {
+    color: #bbb;
 }
 
 /* Song List */
@@ -93,22 +95,21 @@ body.light-mode header .header-text h1 {
     background-size: cover;
     background-position: center center;
     height: 250px;
-    color: transparent;
+    position: relative;
 }
 
-/* Hover effect */
+.song-item .song-playing-gif {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+}
+
 .song-item:hover {
     background-color: #444;
     transform: scale(1.05);
-}
-
-/* Light Mode Song Item */
-body.light-mode .song-item {
-    background-color: #ddd; /* Lighter background in light mode */
-}
-
-body.light-mode .song-item:hover {
-    background-color: #ccc; /* Slightly darker on hover */
 }
 
 /* Audio Player Section */
@@ -125,6 +126,39 @@ body.light-mode .song-item:hover {
     font-weight: bold;
 }
 
-body.light-mode #current-song {
-    color: #333; /* Dark text in light mode */
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #181818;
+    color: white;
+}
+
+body.dark-mode header {
+    background-color: #121212;
+}
+
+body.dark-mode .song-item {
+    background-color: #222;
+}
+
+body.dark-mode .song-item:hover {
+    background-color: #121212;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #f5f5f5;
+    color: #121212;
+}
+
+body.light-mode header {
+    background-color: #ffffff;
+}
+
+body.light-mode .song-item {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+body.light-mode .song-item:hover {
+    background-color: #f0f0f0;
 }

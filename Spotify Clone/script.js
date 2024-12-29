@@ -26,7 +26,7 @@ function populateSongList(songsToDisplay) {
         songItem.innerHTML = `
             <strong>${song.title}</strong><br>
             <small>${song.artist}</small>
-            <img src="Spotify Clone/playing.gif" class="song-playing-gif" alt="Song playing GIF">
+            <img src="Spotify Clone/playing.gif" alt="Playing" class="playing-gif"> <!-- GIF Image -->
         `;
 
         songItem.addEventListener("click", () => playSong(song, index));
@@ -40,7 +40,7 @@ populateSongList(songs);
 // Search Input Event Listener
 const searchInput = document.getElementById("search");
 
-searchInput.addEventListener("input", function () {
+searchInput.addEventListener("input", function() {
     const query = searchInput.value.toLowerCase();
     const filteredSongs = songs.filter(song =>
         song.title.toLowerCase().includes(query) ||
@@ -58,66 +58,27 @@ function playSong(song, index) {
     audioSource.src = song.audioUrl; // Set the song source
     audioPlayer.load(); // Reload the player with the new song
     audioPlayer.play(); // Start playing the song
-
+}
     // Display the song name and artist in white color
     currentSongDisplay.innerHTML = `Now Playing: <strong>${song.title}</strong> by <strong>${song.artist}</strong>`;
     currentSongDisplay.style.color = "white"; // Set text color to white
 
-    // Hide all GIFs
-    const allGifs = document.querySelectorAll('.song-playing-gif');
-    allGifs.forEach(gif => gif.style.display = 'none');
+    // Remove the playing GIF from all song items
+    const songItems = document.querySelectorAll('.song-item');
+    songItems.forEach(item => {
+        const gif = item.querySelector('.playing-gif');
+        if (gif) {
+            gif.style.display = 'none'; // Hide the GIF for all items
+        }
+    });
 
-    // Show the GIF for the currently playing song
-    const currentSongGif = songList.children[index].querySelector('.song-playing-gif');
-    currentSongGif.style.display = 'block';
+    // Add the playing GIF to the clicked song
+    const clickedSongItem = songItems[index];
+    const gif = clickedSongItem.querySelector('.playing-gif');
+    if (gif) {
+        gif.style.display = 'block'; // Show the GIF for the clicked song
+    }
 
     // Highlight the currently playing song
-    const songItems = document.querySelectorAll('.song-item');
     songItems.forEach(item => item.classList.remove('playing')); // Remove from all
-    songItems[index].classList.add('playing'); // Add to the selected one
-}
-
-// Automatically switch to the next song when the current song ends
-const audioPlayer = document.getElementById("audio-player");
-
-audioPlayer.addEventListener("ended", function () {
-    const currentSongIndex = Array.from(songList.children).findIndex(songItem => songItem.classList.contains('playing'));
-    const nextSongIndex = (currentSongIndex + 1) % songs.length; // Loop to the first song after the last one
-
-    playSong(songs[nextSongIndex], nextSongIndex); // Play the next song
-});
-// Toggle dark and light modes
-const themeToggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-
-// Check local storage for theme preference
-const currentTheme = localStorage.getItem('theme') || 'dark-mode';
-body.classList.add(currentTheme);
-
-// Update the theme toggle button icon based on the current theme
-if (currentTheme === 'dark-mode') {
-    themeToggleButton.innerHTML = '🌙'; // Moon icon for dark mode
-} else {
-    themeToggleButton.innerHTML = '🌞'; // Sun icon for light mode
-}
-
-// Event listener for theme toggle
-themeToggleButton.addEventListener('click', () => {
-    if (body.classList.contains('dark-mode')) {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        themeToggleButton.innerHTML = '🌞'; // Sun icon for light mode
-        localStorage.setItem('theme', 'light-mode'); // Save the preference in local storage
-    } else {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        themeToggleButton.innerHTML = '🌙'; // Moon icon for dark mode
-        localStorage.setItem('theme', 'dark-mode'); // Save the preference in local storage
-    }
-});
-// Refresh page when logo is clicked
-const logo = document.querySelector(".logo-container");
-
-logo.addEventListener("click", function() {
-    location.reload(); // Reload the page
-});
+    songItems[index].classList.add('playing');
